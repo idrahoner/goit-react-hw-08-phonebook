@@ -1,27 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectUsername,
-  selectIsLoggedIn,
-  selectAuthError,
-  registerUser,
-} from 'redux/auth';
+import { selectIsLoggedIn, registerUser } from 'redux/auth';
 
 export default function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const username = useSelector(selectUsername);
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const authError = useSelector(selectAuthError);
-  const token = useSelector(state => state.auth.token);
-
-  // console.log('It`s RegisterForm');
-  // console.log('RegisterForm username: ', username);
-  // console.log('RegisterForm isLoggedIn: ', isLoggedIn);
-  // console.log('RegisterForm authError: ', authError);
-  // console.log('RegisterForm token: ', token);
 
   const dispatch = useDispatch();
 

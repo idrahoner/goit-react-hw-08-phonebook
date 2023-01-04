@@ -2,7 +2,11 @@ import PropTypes from 'prop-types';
 import { HiOutlineX, HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLoadingStatus, removeContact } from 'redux/contacts';
+import {
+  selectLoadingStatus,
+  removeContact,
+  editContact,
+} from 'redux/contacts';
 import { Contact, ContactText, DeleteButton } from './ContactItem.styled';
 
 export default function ContactItem({ id, name, number }) {
@@ -16,7 +20,14 @@ export default function ContactItem({ id, name, number }) {
     dispatch(removeContact(id));
   };
 
-  const buttonStatus = loading && clickedButtonId.current === id;
+  const handleEdit = () => {
+    clickedButtonId.current = id;
+    dispatch(editContact({ id, name, number }));
+  };
+
+  const buttonStatus = loading
+    ? clickedButtonId.current === id
+    : (clickedButtonId.current = null);
 
   return (
     <Contact>
@@ -34,6 +45,9 @@ export default function ContactItem({ id, name, number }) {
           <HiOutlineX size="1.5em" />
         )}
       </DeleteButton>
+      <button type="button" disabled={buttonStatus} onClick={handleEdit}>
+        Edit
+      </button>
     </Contact>
   );
 }
