@@ -2,8 +2,7 @@ import PropTypes from 'prop-types';
 import { HiOutlineX, HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeContact } from 'redux/operationsContacts';
-import { selectLoadingStatus } from 'redux/selectors';
+import { selectLoadingStatus, removeContact } from 'redux/contacts';
 import { Contact, ContactText, DeleteButton } from './ContactItem.styled';
 
 export default function ContactItem({ id, name, number }) {

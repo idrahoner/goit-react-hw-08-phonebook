@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { changeFilter } from 'redux/filterSlice';
-import { selectFilter } from 'redux/selectors';
+import { selectFilter, changeFilter } from 'redux/filter';
 
 import { FilterInput } from './Filter.styled';
 
@@ -8,8 +7,10 @@ export default function Filter() {
   const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
-  const handleChange = event =>
+  const handleChange = event => {
+    console.log(changeFilter);
     dispatch(changeFilter(event.currentTarget.value));
+  };
 
   return (
     <FilterInput

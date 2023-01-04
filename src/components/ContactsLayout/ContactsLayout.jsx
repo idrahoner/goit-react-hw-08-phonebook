@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectLoadingStatus, selectContacts } from 'redux/selectors';
+import { selectLoadingStatus, selectContacts } from 'redux/contacts';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 import Loader from 'components/Loader';

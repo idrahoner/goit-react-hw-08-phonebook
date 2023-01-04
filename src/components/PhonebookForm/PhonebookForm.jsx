@@ -1,14 +1,17 @@
 import { toast } from 'react-toastify';
 import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectContacts, selectLoadingStatus } from 'redux/selectors';
-import { addContact } from 'redux/operationsContacts';
+import {
+  selectContacts,
+  selectLoadingStatus,
+  addContact,
+} from 'redux/contacts';
 import { hasInclude } from 'utils';
 import { Form, Label, InputField, SubmitButton } from './PhonebookForm.styled';
 
 export default function PhonebookForm() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const submitedName = useRef(false);
 
   const contacts = useSelector(selectContacts);
@@ -23,7 +26,7 @@ export default function PhonebookForm() {
       case 'name':
         return setName(inputValue);
       case 'number':
-        return setPhone(inputValue);
+        return setNumber(inputValue);
       default:
         return;
     }
@@ -32,17 +35,17 @@ export default function PhonebookForm() {
   const handleSubmit = event => {
     event.preventDefault();
 
-    const isAlreadyHave = hasInclude(name, phone, contacts);
+    const isAlreadyHave = hasInclude(name, number, contacts);
 
     if (isAlreadyHave) {
       return toast.info(isAlreadyHave + ' is already in contacts.');
     }
 
-    dispatch(addContact({ name, phone }));
+    dispatch(addContact({ name, number }));
 
     submitedName.current = name;
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   if (loading && submitedName.current) {
@@ -77,7 +80,7 @@ export default function PhonebookForm() {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          value={phone}
+          value={number}
           onChange={handleChange}
         />
       </Label>
