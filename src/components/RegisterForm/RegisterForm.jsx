@@ -1,19 +1,54 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectUsername,
+  selectIsLoggedIn,
+  selectAuthError,
+  registerUser,
+} from 'redux/auth';
 
 export default function RegisterForm() {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const username = useSelector(selectUsername);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const authError = useSelector(selectAuthError);
+  const token = useSelector(state => state.auth.token);
+
+  // console.log('It`s RegisterForm');
+  // console.log('RegisterForm username: ', username);
+  // console.log('RegisterForm isLoggedIn: ', isLoggedIn);
+  // console.log('RegisterForm authError: ', authError);
+  // console.log('RegisterForm token: ', token);
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    dispatch(registerUser({ name, email, password }));
+
+    setName('');
+    setEmail('');
+    setPassword('');
+    event.currentTarget.reset();
+  };
+
+  if (isLoggedIn) {
+    return null;
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <label>
         Username:{' '}
         <input
           type="text"
-          name="username"
-          value={username}
-          onChange={event => setUsername(event.currentTarget.value)}
+          name="name"
+          value={name}
+          onChange={event => setName(event.currentTarget.value)}
         />
       </label>
       <label>
@@ -30,7 +65,7 @@ export default function RegisterForm() {
         <input
           type="password"
           name="password"
-          valuse={password}
+          value={password}
           onChange={event => setPassword(event.currentTarget.value)}
         />
       </label>

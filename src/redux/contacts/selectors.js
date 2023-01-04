@@ -12,8 +12,6 @@ export const selectFilteredContacts = createSelector(
   (contacts, filterInput) => {
     const query = filterInput.trim().toLowerCase();
 
-    console.log('query: ', query);
-    console.log('contacts: ', contacts);
     if (!query) {
       return contacts;
     }

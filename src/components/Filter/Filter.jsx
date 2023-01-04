@@ -8,7 +8,6 @@ export default function Filter() {
   const dispatch = useDispatch();
 
   const handleChange = event => {
-    console.log(changeFilter);
     dispatch(changeFilter(event.currentTarget.value));
   };
 
