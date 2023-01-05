@@ -8,6 +8,7 @@ import {
 } from 'redux/contacts';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
+import PhonebookForm from 'components/PhonebookForm';
 import Loader from 'components/Loader';
 
 export default function ContactsLayout() {
@@ -33,6 +34,7 @@ export default function ContactsLayout() {
 
   return (
     <>
+      <PhonebookForm />
       <Filter />
       <ContactList />
     </>
