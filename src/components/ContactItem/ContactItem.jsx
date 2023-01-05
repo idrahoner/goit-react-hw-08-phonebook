@@ -1,47 +1,52 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { HiOutlineX, HiOutlineDotsHorizontal } from 'react-icons/hi';
-import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectLoadingStatus,
   removeContact,
   editContact,
 } from 'redux/contacts';
+import Modal from 'components/Modal';
+import PhonebookForm from 'components/PhonebookForm';
 import {
   Contact,
   ContactText,
   DeleteButton,
   OpenModalButton,
 } from './ContactItem.styled';
-import Modal from 'components/Modal';
-import PhonebookForm from 'components/PhonebookForm';
 
 export default function ContactItem({ id, name, number }) {
   const [showModal, setShowModal] = useState(false);
+  const [disabledButton, setDisabledButton] = useState(false);
 
   const dispatch = useDispatch();
   const loading = useSelector(selectLoadingStatus);
-
-  const clickedButtonId = useRef(null);
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
   const handleRemove = () => {
-    clickedButtonId.current = id;
+    setDisabledButton(true);
     dispatch(removeContact(id));
   };
 
-  const handleEdit = () => {
-    clickedButtonId.current = id;
-    dispatch(editContact({ id, name, number }));
+  const handleEdit = contact => {
+    setDisabledButton(true);
+    dispatch(editContact({ id, ...contact }));
+    toggleModal();
+    toast.success(
+      `Hooray! You have successfully edited ${contact.name}'s contact!`
+    );
   };
 
-  const buttonStatus = loading
-    ? clickedButtonId.current === id
-    : (clickedButtonId.current = null);
+  useEffect(() => {
+    if (!loading) {
+      setDisabledButton(false);
+    }
+  }, [loading]);
 
   return (
     <Contact>
@@ -50,7 +55,7 @@ export default function ContactItem({ id, name, number }) {
       </ContactText>
       <OpenModalButton
         type="button"
-        disabled={buttonStatus}
+        disabled={disabledButton}
         onClick={toggleModal}
       >
         Edit
@@ -58,9 +63,9 @@ export default function ContactItem({ id, name, number }) {
       <DeleteButton
         type="button"
         onClick={handleRemove}
-        disabled={buttonStatus}
+        disabled={disabledButton}
       >
-        {buttonStatus ? (
+        {disabledButton ? (
           <HiOutlineDotsHorizontal size="1.5em" />
         ) : (
           <HiOutlineX size="1.5em" />

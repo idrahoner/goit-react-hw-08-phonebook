@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { selectIsLoggedIn } from 'redux/auth';
 import {
   selectLoadingStatus,
@@ -14,8 +15,9 @@ import PhonebookForm from 'components/PhonebookForm';
 import Loader from 'components/Loader';
 import Modal from 'components/Modal';
 import Box from 'components/Box';
+import { hasInclude } from 'utils';
 
-export default function ContactsLayout() {
+export default function Contacts() {
   const [showModal, setShowModal] = useState(false);
   const contacts = useSelector(selectContacts);
   const loading = useSelector(selectLoadingStatus);
@@ -34,8 +36,16 @@ export default function ContactsLayout() {
   };
 
   const handleSubmit = contact => {
-    dispatch(addContact(contact));
+    const isAlreadyHave = hasInclude(contact.name, contact.number, contacts);
     toggleModal();
+
+    if (isAlreadyHave) {
+      return toast.info(isAlreadyHave + ' is already in contacts.');
+    }
+    toast.success(
+      `Hooray! You have successfully added ${contact.name}'s contact!`
+    );
+    dispatch(addContact(contact));
   };
 
   if (loading && !contacts.length) {

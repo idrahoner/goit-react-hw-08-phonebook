@@ -1,9 +1,5 @@
 import { PropTypes } from 'prop-types';
-import { toast } from 'react-toastify';
-import { useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { selectContacts, selectLoadingStatus } from 'redux/contacts';
-import { hasInclude } from 'utils';
+import { useState } from 'react';
 import { Form, Label, InputField, SubmitButton } from './PhonebookForm.styled';
 
 export default function PhonebookForm({
@@ -13,10 +9,6 @@ export default function PhonebookForm({
 }) {
   const [name, setName] = useState(defaultName || '');
   const [number, setNumber] = useState(defaultNumber || '');
-  const submitedName = useRef(false);
-
-  const contacts = useSelector(selectContacts);
-  const loading = useSelector(selectLoadingStatus);
 
   const handleChange = event => {
     const inputName = event.currentTarget.name;
@@ -35,28 +27,11 @@ export default function PhonebookForm({
   const handleSubmit = event => {
     event.preventDefault();
 
-    const isAlreadyHave = hasInclude(name, number, contacts);
-
-    if (isAlreadyHave) {
-      return toast.info(isAlreadyHave + ' is already in contacts.');
-    }
-
     onSubmit({ name, number });
 
-    submitedName.current = name;
     setName('');
     setNumber('');
   };
-
-  if (loading && submitedName.current) {
-    toast.success(
-      `Hooray! You have successfully added ${submitedName.current}'s contact!`
-    );
-  }
-
-  if (!loading && submitedName.current) {
-    submitedName.current = false;
-  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -84,9 +59,7 @@ export default function PhonebookForm({
           onChange={handleChange}
         />
       </Label>
-      <SubmitButton type="submit" disabled={loading && submitedName.current}>
-        Add contact
-      </SubmitButton>
+      <SubmitButton type="submit">Add contact</SubmitButton>
     </Form>
   );
 }
