@@ -8,7 +8,12 @@ import {
   removeContact,
   editContact,
 } from 'redux/contacts';
-import { Contact, ContactText, DeleteButton } from './ContactItem.styled';
+import {
+  Contact,
+  ContactText,
+  DeleteButton,
+  OpenModalButton,
+} from './ContactItem.styled';
 import Modal from 'components/Modal';
 import PhonebookForm from 'components/PhonebookForm';
 
@@ -43,6 +48,13 @@ export default function ContactItem({ id, name, number }) {
       <ContactText>
         <b>{name}</b>: {number}
       </ContactText>
+      <OpenModalButton
+        type="button"
+        disabled={buttonStatus}
+        onClick={toggleModal}
+      >
+        Edit
+      </OpenModalButton>
       <DeleteButton
         type="button"
         onClick={handleRemove}
@@ -54,9 +66,7 @@ export default function ContactItem({ id, name, number }) {
           <HiOutlineX size="1.5em" />
         )}
       </DeleteButton>
-      <button type="button" disabled={buttonStatus} onClick={toggleModal}>
-        Edit
-      </button>
+
       {showModal && (
         <Modal onClose={toggleModal}>
           <PhonebookForm onSubmit={handleEdit} name={name} number={number} />

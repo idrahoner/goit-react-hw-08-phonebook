@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Contact = styled.li`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
 
@@ -46,4 +45,10 @@ export const DeleteButton = styled.button`
   :disabled {
     background: ${p => p.theme.colors.disabled};
   }
+`;
+
+export const OpenModalButton = styled.button`
+  margin-right: ${p => p.theme.space[4]}px;
+
+  font-size: ${p => p.theme.fontSizes.s}px;
 `;
