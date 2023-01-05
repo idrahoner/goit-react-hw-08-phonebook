@@ -9,7 +9,7 @@ import {
 import { hasInclude } from 'utils';
 import { Form, Label, InputField, SubmitButton } from './PhonebookForm.styled';
 
-export default function PhonebookForm() {
+export default function PhonebookForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const submitedName = useRef(false);
@@ -42,6 +42,7 @@ export default function PhonebookForm() {
     }
 
     dispatch(addContact({ name, number }));
+    onSubmit();
 
     submitedName.current = name;
     setName('');

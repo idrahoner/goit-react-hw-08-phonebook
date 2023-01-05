@@ -6,7 +6,6 @@ export const Form = styled.form`
 
   max-width: 400px;
   padding: ${p => p.theme.space[5]}px;
-  border: ${p => p.theme.borders.normal};
 `;
 
 export const Label = styled.label`
@@ -30,7 +29,7 @@ export const SubmitButton = styled.button`
   min-width: 150px;
   height: 25px;
 
-  margin-right: auto;
+  margin: auto;
 
   font-size: ${p => p.theme.fontSizes.s}px;
 `;
