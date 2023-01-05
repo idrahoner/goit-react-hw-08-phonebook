@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { logoutUser } from 'redux/auth';
+import { SignOutButton } from './LogoutButton.styled';
 
 export default function LogoutButton() {
   const dispatch = useDispatch();
@@ -9,8 +10,8 @@ export default function LogoutButton() {
   };
 
   return (
-    <button type="button" onClick={handleLogout}>
+    <SignOutButton type="button" onClick={handleLogout}>
       Log Out
-    </button>
+    </SignOutButton>
   );
 }
