@@ -1,22 +1,22 @@
+import { PropTypes } from 'prop-types';
 import { toast } from 'react-toastify';
 import { useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectContacts,
-  selectLoadingStatus,
-  addContact,
-} from 'redux/contacts';
+import { useSelector } from 'react-redux';
+import { selectContacts, selectLoadingStatus } from 'redux/contacts';
 import { hasInclude } from 'utils';
 import { Form, Label, InputField, SubmitButton } from './PhonebookForm.styled';
 
-export default function PhonebookForm({ onSubmit }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export default function PhonebookForm({
+  onSubmit,
+  name: defaultName,
+  number: defaultNumber,
+}) {
+  const [name, setName] = useState(defaultName || '');
+  const [number, setNumber] = useState(defaultName || '');
   const submitedName = useRef(false);
 
   const contacts = useSelector(selectContacts);
   const loading = useSelector(selectLoadingStatus);
-  const dispatch = useDispatch();
 
   const handleChange = event => {
     const inputName = event.currentTarget.name;
@@ -41,8 +41,7 @@ export default function PhonebookForm({ onSubmit }) {
       return toast.info(isAlreadyHave + ' is already in contacts.');
     }
 
-    dispatch(addContact({ name, number }));
-    onSubmit();
+    onSubmit({ name, number });
 
     submitedName.current = name;
     setName('');
@@ -91,3 +90,9 @@ export default function PhonebookForm({ onSubmit }) {
     </Form>
   );
 }
+
+PhonebookForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  number: PropTypes.string,
+};

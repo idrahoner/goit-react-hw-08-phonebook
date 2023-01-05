@@ -5,6 +5,7 @@ import {
   selectLoadingStatus,
   selectContacts,
   fetchContacts,
+  addContact,
 } from 'redux/contacts';
 import { OpenModalButton } from './Contacts.styled';
 import Filter from 'components/Filter';
@@ -32,6 +33,11 @@ export default function ContactsLayout() {
     setShowModal(!showModal);
   };
 
+  const handleSubmit = contact => {
+    dispatch(addContact(contact));
+    toggleModal();
+  };
+
   if (loading && !contacts.length) {
     return <Loader />;
   }
@@ -43,7 +49,7 @@ export default function ContactsLayout() {
       </OpenModalButton>
       {showModal && (
         <Modal onClose={toggleModal}>
-          <PhonebookForm onSubmit={toggleModal} />
+          <PhonebookForm onSubmit={handleSubmit} />
         </Modal>
       )}
 
