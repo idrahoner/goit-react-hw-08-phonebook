@@ -6,11 +6,13 @@ import {
   selectContacts,
   fetchContacts,
 } from 'redux/contacts';
+import { OpenModalButton } from './Contacts.styled';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 import PhonebookForm from 'components/PhonebookForm';
 import Loader from 'components/Loader';
 import Modal from 'components/Modal';
+import Box from 'components/Box';
 
 export default function ContactsLayout() {
   const [showModal, setShowModal] = useState(false);
@@ -35,10 +37,10 @@ export default function ContactsLayout() {
   }
 
   return (
-    <>
-      <button type="button" onClick={toggleModal}>
+    <Box display="flex" flexDirection="column" p={5}>
+      <OpenModalButton type="button" onClick={toggleModal}>
         Add contact
-      </button>
+      </OpenModalButton>
       {showModal && (
         <Modal onClose={toggleModal}>
           <PhonebookForm onSubmit={toggleModal} />
@@ -47,6 +49,6 @@ export default function ContactsLayout() {
 
       <Filter />
       <ContactList />
-    </>
+    </Box>
   );
 }
