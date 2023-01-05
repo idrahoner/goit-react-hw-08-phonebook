@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PropTypes } from 'prop-types';
+import { Form, Label, Input, SubmitButton } from './RegisterForm.styled';
 
 export default function RegisterForm({ onSubmit }) {
   const [name, setName] = useState('');
@@ -16,36 +17,36 @@ export default function RegisterForm({ onSubmit }) {
     setPassword('');
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <Form onSubmit={handleSubmit}>
+      <Label>
         Username:{' '}
-        <input
+        <Input
           type="text"
           name="name"
           value={name}
           onChange={event => setName(event.currentTarget.value)}
         />
-      </label>
-      <label>
+      </Label>
+      <Label>
         E-mail:{' '}
-        <input
+        <Input
           type="email"
           name="email"
           value={email}
           onChange={event => setEmail(event.currentTarget.value)}
         />
-      </label>
-      <label>
+      </Label>
+      <Label>
         Password:{' '}
-        <input
+        <Input
           type="password"
           name="password"
           value={password}
           onChange={event => setPassword(event.currentTarget.value)}
         />
-      </label>
-      <button type="submit"> Sign up</button>
-    </form>
+      </Label>
+      <SubmitButton type="submit"> Sign up</SubmitButton>
+    </Form>
   );
 }
 

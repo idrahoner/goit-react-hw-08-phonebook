@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PropTypes } from 'prop-types';
+import { Form, Label, Input, SubmitButton } from './LoginForm.styled';
 
 export default function LoginForm({ onSubmit }) {
   const [email, setEmail] = useState('');
@@ -15,27 +16,27 @@ export default function LoginForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <Form onSubmit={handleSubmit}>
+      <Label>
         E-mail:{' '}
-        <input
+        <Input
           type="email"
           name="email"
           value={email}
           onChange={event => setEmail(event.currentTarget.value)}
-        ></input>
-      </label>
-      <label>
+        ></Input>
+      </Label>
+      <Label>
         Password:{' '}
-        <input
+        <Input
           type="password"
           name="password"
           value={password}
           onChange={event => setPassword(event.currentTarget.value)}
-        ></input>
-      </label>
-      <button type="submit">Log in</button>
-    </form>
+        ></Input>
+      </Label>
+      <SubmitButton type="submit">Log in</SubmitButton>
+    </Form>
   );
 }
 
