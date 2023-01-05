@@ -12,7 +12,7 @@ export default function PhonebookForm({
   number: defaultNumber,
 }) {
   const [name, setName] = useState(defaultName || '');
-  const [number, setNumber] = useState(defaultName || '');
+  const [number, setNumber] = useState(defaultNumber || '');
   const submitedName = useRef(false);
 
   const contacts = useSelector(selectContacts);

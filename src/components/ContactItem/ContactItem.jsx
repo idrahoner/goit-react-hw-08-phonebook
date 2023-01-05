@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { HiOutlineX, HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,12 +9,20 @@ import {
   editContact,
 } from 'redux/contacts';
 import { Contact, ContactText, DeleteButton } from './ContactItem.styled';
+import Modal from 'components/Modal';
+import PhonebookForm from 'components/PhonebookForm';
 
 export default function ContactItem({ id, name, number }) {
+  const [showModal, setShowModal] = useState(false);
+
   const dispatch = useDispatch();
   const loading = useSelector(selectLoadingStatus);
 
   const clickedButtonId = useRef(null);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const handleRemove = () => {
     clickedButtonId.current = id;
@@ -45,9 +54,14 @@ export default function ContactItem({ id, name, number }) {
           <HiOutlineX size="1.5em" />
         )}
       </DeleteButton>
-      <button type="button" disabled={buttonStatus} onClick={handleEdit}>
+      <button type="button" disabled={buttonStatus} onClick={toggleModal}>
         Edit
       </button>
+      {showModal && (
+        <Modal onClose={toggleModal}>
+          <PhonebookForm onSubmit={handleEdit} name={name} number={number} />
+        </Modal>
+      )}
     </Contact>
   );
 }
