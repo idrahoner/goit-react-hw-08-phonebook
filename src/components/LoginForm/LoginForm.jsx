@@ -1,26 +1,18 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoggedIn, loginUser } from 'redux/auth';
+import { PropTypes } from 'prop-types';
 
-export default function LoginForm() {
+export default function LoginForm({ onSubmit }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const dispatch = useDispatch();
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    dispatch(loginUser({ email, password }));
+    onSubmit({ email, password });
 
     setEmail('');
     setPassword('');
   };
-
-  if (isLoggedIn) {
-    return null;
-  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -46,3 +38,7 @@ export default function LoginForm() {
     </form>
   );
 }
+
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

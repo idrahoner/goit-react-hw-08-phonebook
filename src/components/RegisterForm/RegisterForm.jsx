@@ -1,31 +1,20 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoggedIn, registerUser } from 'redux/auth';
+import { PropTypes } from 'prop-types';
 
-export default function RegisterForm() {
+export default function RegisterForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-
-  const dispatch = useDispatch();
-
   const handleSubmit = event => {
     event.preventDefault();
 
-    dispatch(registerUser({ name, email, password }));
+    onSubmit({ name, email, password });
 
     setName('');
     setEmail('');
     setPassword('');
-    event.currentTarget.reset();
   };
-
-  if (isLoggedIn) {
-    return null;
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -59,3 +48,7 @@ export default function RegisterForm() {
     </form>
   );
 }
+
+RegisterForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

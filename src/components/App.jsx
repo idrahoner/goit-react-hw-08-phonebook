@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthError, fetchUser } from 'redux/auth';
-import ContactsLayout from 'components/ContactsLayout';
-import LoginForm from 'components/LoginForm';
-import RegisterForm from 'components/RegisterForm';
+import Contacts from 'pages/Contacts';
+import Login from 'pages/Login';
+import Registration from 'pages/Registration';
 import Layout from 'components/Layout';
 import Greetings from 'pages/Greetings';
 import { PrivateRoute, RestrictedRoute } from 'utils';
@@ -34,14 +34,14 @@ export default function App() {
         <Route
           path="login"
           element={
-            <RestrictedRoute component={<LoginForm />} redirectTo="/contacts" />
+            <RestrictedRoute component={<Login />} redirectTo="/contacts" />
           }
         />
         <Route
           path="register"
           element={
             <RestrictedRoute
-              component={<RegisterForm />}
+              component={<Registration />}
               redirectTo="/contacts"
             />
           }
@@ -49,7 +49,7 @@ export default function App() {
         <Route
           path="contacts"
           element={
-            <PrivateRoute component={<ContactsLayout />} redirectTo="/login" />
+            <PrivateRoute component={<Contacts />} redirectTo="/login" />
           }
         />
       </Route>
