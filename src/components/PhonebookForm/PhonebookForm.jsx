@@ -45,6 +45,7 @@ export default function PhonebookForm({
           required
           value={name}
           onChange={handleChange}
+          autoFocus
         />
       </Label>
       <Label>

@@ -5,6 +5,8 @@ export const theme = Object.freeze({
     light: '#fff',
     accent: '#ec3515',
     disabled: '#999',
+    textColor: '#2e2e2e',
+    blue: 'cornflowerblue',
   },
   fontSizes: {
     xs: 12,
@@ -26,4 +28,5 @@ export const theme = Object.freeze({
     regularScale: 'scale 250ms linear',
     regularBgColor: 'background-color 250ms linear',
   },
+  breakpoints: ['768px', '1280px'],
 });

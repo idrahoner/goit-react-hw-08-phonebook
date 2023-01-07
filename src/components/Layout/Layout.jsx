@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Navigation from 'components/Navigation';
 import Box from 'components/Box';
+import { Logo } from './Layout.styled';
 
 export default function Layout() {
   return (
@@ -15,7 +16,7 @@ export default function Layout() {
         borderBottom="normal"
         as="header"
       >
-        <h1>Phonebook</h1>
+        <Logo to="/">Phonebook</Logo>
         <Navigation />
       </Box>
       <Outlet />
