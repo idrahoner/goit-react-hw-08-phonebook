@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { useState } from 'react';
-import { Form, Label, InputField, SubmitButton } from './PhonebookForm.styled';
+import { Form, Label, Input, SubmitButton } from 'components/Form';
 
 export default function PhonebookForm({
   onSubmit,
@@ -37,7 +37,7 @@ export default function PhonebookForm({
     <Form onSubmit={handleSubmit}>
       <Label>
         Name
-        <InputField
+        <Input
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -50,7 +50,7 @@ export default function PhonebookForm({
       </Label>
       <Label>
         Phone
-        <InputField
+        <Input
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"

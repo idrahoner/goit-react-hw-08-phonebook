@@ -25,3 +25,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>
 );
+
+// Worked varsion:
+
+//    username: hellozavr
+//    e-mail: hellozavr@mail.com
+//    pswd: hellozavr123
+
+//    username: hello kitty
+//    e-mail: hello_kitty@mail.com
+//    pswd: hellokitty123

@@ -1,12 +1,20 @@
 export const theme = Object.freeze({
-  borders: { none: 'none', normal: '2px solid black' },
+  borders: {
+    none: 'none',
+    normal: '2px solid black',
+    formCard: '1px solid #c4caec',
+    formField: '2px solid #394ebe',
+  },
   colors: {
     dark: '#000',
     light: '#fff',
     accent: '#ec3515',
     disabled: '#999',
-    textColor: '#2e2e2e',
+    text: '#000',
     blue: 'cornflowerblue',
+    primary: '#394EBE',
+    secondary: '#4EBE39',
+    tertiary: '#BE394E',
   },
   fontSizes: {
     xs: 12,
@@ -21,6 +29,7 @@ export const theme = Object.freeze({
   radii: { none: 'none', normal: 5, circle: '50%' },
   shadows: {
     light: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+    formCard: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   },
   sizes: { scaleUp: 1.1, scaleDown: 0.9 },
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
