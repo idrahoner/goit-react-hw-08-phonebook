@@ -1,8 +1,7 @@
-import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from 'redux/auth';
 import UserMenu from 'components/UserMenu';
-import { List } from './Navigation.styled';
+import { List, ListItem, AuthLink } from './Navigation.styled';
 
 export default function Navigation() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -12,12 +11,12 @@ export default function Navigation() {
         <UserMenu />
       ) : (
         <List>
-          <li>
-            <NavLink to="login">Log In</NavLink>
-          </li>
-          <li>
-            <NavLink to="register">Register</NavLink>
-          </li>
+          <ListItem>
+            <AuthLink to="login">Log In</AuthLink>
+          </ListItem>
+          <ListItem>
+            <AuthLink to="register">Register</AuthLink>
+          </ListItem>
         </List>
       )}
     </>

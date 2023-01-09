@@ -14,7 +14,9 @@ export default function Layout() {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Logo to="/">Phonebook</Logo>
+          <Logo to="/" fontSize={['l', 'xl']} fontWeight="bold">
+            Phonebook
+          </Logo>
           <Navigation />
         </Container>
       </Box>

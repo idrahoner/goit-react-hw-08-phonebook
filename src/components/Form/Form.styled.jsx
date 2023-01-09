@@ -1,5 +1,20 @@
 import styled from 'styled-components';
 
+import { space, color, layout } from 'styled-system';
+
+export const Square = styled.div(
+  {
+    boxSizing: 'border-box',
+    minWidth: 200,
+    minHeight: 200,
+    backgroundColor: 'primary',
+    marginTop: 3,
+  },
+  space,
+  color,
+  layout
+);
+
 export const Form = styled.form`
   /* box-sizing: border-box; */
   display: flex;

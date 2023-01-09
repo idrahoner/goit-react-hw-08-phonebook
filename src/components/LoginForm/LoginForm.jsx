@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { Form, Label, Input, SubmitButton } from 'components/Form';
+import { Form, Label, Input, SubmitButton, Square } from 'components/Form';
 import Container from 'components/Container';
 import Box from 'components/Box';
 
@@ -41,6 +41,7 @@ export default function LoginForm({ onSubmit }) {
           </Label>
           <SubmitButton type="submit">Log in</SubmitButton>
         </Form>
+        <Square />
       </Container>
     </Box>
   );
